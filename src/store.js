@@ -45,8 +45,28 @@ function reducer(state = initState, action) {
             max_content_id:newId,
             mode : 'READ',
             selected_content_id:newId
-        }
+        };
    }
+    if(action.type === 'UPDATE') {
+        return {...state, mode:'UPDATE'}
+    }
+    if(action.type === 'UPDATE_PROCESS'){
+         var updateContents = [
+            ...state.contents,
+        ];
+        for(var i=0; i<updateContents.length; i++) {
+            if(updateContents[i].id === action.id){
+                updateContents[i].title = action.title;
+                updateContents[i].desc = action.desc;
+            }
+        }
+         return {
+             ...state,
+             contents : updateContents,
+             mode : 'READ',
+             selected_content_id:action.id
+         };
+    }
    return state;
 }
 export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
