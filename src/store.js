@@ -8,8 +8,8 @@ var initState = {
     selected_content_id : 1,
     contents : [
         {id : 1, title : 'HTML', desc : 'HTML is ...'},
-        {id : 1, title : 'CSS', desc : 'CSS is ...'},
-        {id : 1, title : 'JS', desc : 'JS is ...'}
+        {id : 2, title : 'CSS', desc : 'CSS is ...'},
+        {id : 3, title : 'JS', desc : 'JS is ...'}
     ]
 }
 function reducer(state = initState, action) {
@@ -19,9 +19,13 @@ function reducer(state = initState, action) {
         return initState;
     }
     */
-   if(action.type === 'CHANGE_MODE') {
+   if(action.type === 'WELCOME') {
        //state 값을 바꿔줘야하는데 직빵으로 하면 데이터를 immutability어긋, 따라서 복제해서 사용
        return {...state, mode:action.mode }; //WEB클릭하면서 onclick 이벤트(Header.jsx)발생하고 action.mode를 담는다(welcome)
+   }
+   if(action.type === 'READ') {
+        return {...state, mode:'READ',
+        selected_content_id:action.id}     
    }
    return state;
 }
