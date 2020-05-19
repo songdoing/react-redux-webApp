@@ -8,8 +8,8 @@ class Header extends Component {
             <header>
                 <h1><a href="#welcome" onClick = {function(){
                     this.props.onClick();
-                }.bind(this)}>WEB</a></h1>
-                World Wide Web
+                }.bind(this)}>Jenny's Skills</a></h1>
+                What I have..
             </header>
         )
     }

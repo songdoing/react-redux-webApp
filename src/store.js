@@ -2,8 +2,8 @@ import {createStore} from 'redux';
 var initState = {
     mode : 'WELCOME',
     welcome_content : {
-        title : 'WEB',
-        desc : 'Hello, WEB'
+        title : 'WEB DEVELOPER - Jenny Song',
+        desc : 'Hello, World!'
     },
     selected_content_id : 1,
     max_content_id : 3,
@@ -52,7 +52,7 @@ function reducer(state = initState, action) {
     }
     if(action.type === 'UPDATE_PROCESS'){
          var updateContents = [
-            ...state.contents,
+            ...state.contents
         ];
         for(var i=0; i<updateContents.length; i++) {
             if(updateContents[i].id === action.id){
@@ -66,6 +66,19 @@ function reducer(state = initState, action) {
              mode : 'READ',
              selected_content_id:action.id
          };
+    }
+    if(action.type === 'DELETE_PROCESS'){
+        var deleteContents = state.contents.filter(function(e){
+            if(e.id === state.selected_content_id) {
+                return false;
+            }
+            return true;
+        })//immutable하게 삭제해야 하므로 filter함수
+        return {
+            ...state,
+            contents : deleteContents,
+            mode:'WELCOME'
+        }
     }
    return state;
 }
